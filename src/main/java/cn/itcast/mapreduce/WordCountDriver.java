@@ -28,7 +28,7 @@ public class WordCountDriver {
 	public static void main(String[] args) throws Exception {
 		
 		Configuration conf = new Configuration();
-//		conf.set("fs.defaultFS", "hdfs://mini1:9000");
+		conf.set("fs.defaultFS", "hdfs://192.168.242.100:9000");
 //		conf.set("mapreduce.framework.name", "yarn");
 //		conf.set("yarn.resourcemanager.hostname", "mini1");
 		Job job = Job.getInstance(conf);
@@ -61,6 +61,10 @@ public class WordCountDriver {
 		
 	    //FileInputFormat.setInputPaths(job, new Path("D:\\jy\\wordcount\\input"));
 		//FileOutputFormat.setOutputPath(job, new Path("D:\\jy\\wordcount\\output"));
+		
+		// combiner 在map端实现局部聚合
+//		job.setCombinerClass(WordCountReducer.class);
+//		job.setCombinerClass(WordCountCombiner.class);
 
 		boolean res = job.waitForCompletion(true);
 		
